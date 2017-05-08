@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<h2 class="page-header">Folders <a class="btn btn-default" id="addFolder"><span class="glyphicon glyphicon-plus"></span></a></h2>
+{{folders}} <br>
+TTHIS
+{{folders | serialize }}
+    <table class="table table-hover">
+        <tbody id="tbody">
+            {% for folder in folders %}
+                <tr id="tr">
+                    <td id="{{folder.id}}">{{folder.name}}</td>
+                    <td>
+                        <button class="btn btn-default" id="editFolder" data-id="{{folder.id}}">Edit</button>
+                        <a href="/folder/delete/{{folder.id}}" class="btn btn-default" id="deleteFolder">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block javascripts %}
+    {% javascripts 'bundles/app/js/folderClick.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts 'bundles/app/js/addFolder.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    $(document).ready(function() {
+            $.ajax({
+					url: folders_list,
+					dataType: 'json',
+					success: function(data) {
+						$('.news-grid').data('href', data.next)
+						var source = $("#news-template").html();
+						var template = Handlebars.compile(source);
+						var html = template(data);
+						content = $(html)
+						content.hide();
+						grid.append(content)
+						content.imagesLoaded().progress( function( imgLoad, image ) {
+						    item = $(image.img).parents('.grid-item');
+						    item.show();
+						    grid.masonry('appended', item);
+						});
+						/*
+						$('#loading').hide();
+						*/
+				    }
+        });
+        }
+    </script>
+{% endblock %}

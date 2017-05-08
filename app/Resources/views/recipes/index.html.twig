@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="page-header">Recipes <a href="recipe/create" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a></h2>
+    {{ include('recipes/list.html.twig', { 'recipes': recipes }) }}
+{% endblock %}

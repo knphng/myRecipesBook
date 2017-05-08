@@ -1,0 +1,24 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Recipes</th>
+            <th>Cooking Time (hh:mm)</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        {% for recipe in recipes %}
+        <tr id="tr-id">
+            <td id="{{recipe.id}}">{{recipe.name}}</td>
+            <td>{{recipe.cookingTime|date('H:i')}}</td>
+            <td><a href="/recipe/edit/{{recipe.id}}" class="btn btn-default" id="set"><span class="glyphicon glyphicon-pencil" ></span></a>
+            <a href="/recipe/delete/{{recipe.id}}" class="btn btn-default" id="set"><span class="glyphicon glyphicon-trash" ></span></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% block javascripts %}
+    {% javascripts 'bundles/app/js/recipeClick.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

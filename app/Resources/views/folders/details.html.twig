@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{{json}}
+    <h2 class="page-header">{{folder.name}}</h2>
+     {{ include('recipes/list.html.twig', { 'recipes': recipes }) }}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2 class="page-header">
+        {{recipe.name}}
+        <a href="/recipe/edit/{{recipe.id}}" class="btn btn-default" id="set"><span class="glyphicon glyphicon-pencil" ></span></a>
+        <a href="/recipe/remove/{{recipe.id}}" class="btn btn-default" id="set"><span class="glyphicon glyphicon-trash" ></span></a>
+    </h2>
+    <h4>Cooking Time :</h4>
+    <p id="cookingTime"> <span id='time'>{{recipe.cookingTime|date('H:i:s')}}</span>  <button class="btn btn-default" id="set"><span class="glyphicon glyphicon-time" ></span></button> <p>
+    <hr>
+    <h4>Ingredients :</h4>
+    <p>{{recipe.ingredients}}<p>
+    <hr>
+    <h4>Recipe :</h4>
+    <p>{{recipe.recipe}}<p>
+    <hr>
+{% endblock %}
+{% block javascripts %}
+    {% javascripts 'bundles/app/js/timer.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
